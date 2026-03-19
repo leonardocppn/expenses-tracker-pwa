@@ -1,6 +1,6 @@
 # Expenses Tracker
 
-A minimalist personal PWA for tracking daily **expenses**, **sleep**, and **mood** — with long-term correlation stats.
+A minimalist personal PWA for tracking daily **expenses**, **sleep**, and **mood**, with long-term correlation stats.
 
 Built for daily use on an AMOLED phone screen. Zero external dependencies beyond Chart.js. No backend framework. No database ORM. Just Cloudflare Workers + D1 (SQLite) + vanilla JS/HTML/CSS.
 
@@ -10,12 +10,12 @@ Built for daily use on an AMOLED phone screen. Zero external dependencies beyond
 
 ## Features
 
-- **Expenses** — log amount, category, and macro type (essential / leisure / other). Filter by period and macro.
-- **Sleep** — tap to record bedtime and wake-up time. Hours rounded to the nearest half-hour. 7-day chart with mood overlay.
-- **Mood** — 4-level scale (Bad / Low / Good / Great). Monthly and yearly calendar views.
-- **Stats** — monthly breakdown by macro and category, correlation medians (mood × sleep, mood × expense, sleep × expense), weekly trend bar chart.
-- **PWA** — installable, works offline via service worker, AMOLED-optimised dark theme.
-- **Preset expenses** — configurable quick-fill popup for recurring costs (subscriptions, passes, etc.).
+- **Expenses**, log amount, category, and macro type (essential / leisure / other). Filter by period and macro.
+- **Sleep**, tap to record bedtime and wake-up time. Hours rounded to the nearest half-hour. 7-day chart with mood overlay.
+- **Mood**, 4-level scale (Bad / Low / Good / Great). Monthly and yearly calendar views.
+- **Stats**, monthly breakdown by macro and category, correlation medians (mood × sleep, mood × expense, sleep × expense), weekly trend bar chart.
+- **PWA**, installable, works offline via service worker, AMOLED-optimised dark theme.
+- **Preset expenses**, configurable quick-fill popup for recurring costs (subscriptions, passes, etc.).
 
 ---
 ## Screenshots
@@ -48,11 +48,11 @@ tracker/
 ├── worker/
 │   ├── src/
 │   │   └── index.js        # Cloudflare Worker (REST API)
-│   ├── wrangler.toml       # Worker config — fill in your database_id
+│   ├── wrangler.toml       # Worker config, fill in your database_id
 │   └── package.json
 └── frontend/
     ├── index.html
-    ├── app.js              # All frontend logic — set API constant at top
+    ├── app.js              # All frontend logic, set API constant at top
     ├── style.css
     ├── manifest.json
     ├── sw.js               # Service worker
@@ -69,7 +69,7 @@ tracker/
 - [Node.js](https://nodejs.org/) (for Wrangler CLI)
 - A [Cloudflare account](https://dash.cloudflare.com/) (free tier is sufficient)
 
-### 1 — Create the D1 database
+### 1. Create the D1 database
 
 ```bash
 npx wrangler d1 create your-tracker-db
@@ -77,13 +77,13 @@ npx wrangler d1 create your-tracker-db
 
 Copy the `database_id` from the output.
 
-### 2 — Apply the schema
+### 2. Apply the schema
 
 ```bash
 npx wrangler d1 execute your-tracker-db --file=schema.sql
 ```
 
-### 3 — Configure the Worker
+### 3. Configure the Worker
 
 Edit `worker/wrangler.toml` and replace the placeholder values:
 
@@ -98,7 +98,7 @@ database_name = "your-tracker-db"
 database_id = "YOUR_DATABASE_ID"   # ← paste your real ID here
 ```
 
-### 4 — Deploy the Worker
+### 4. Deploy the Worker
 
 ```bash
 cd tracker/worker
@@ -108,7 +108,7 @@ npx wrangler deploy
 
 Note the Worker URL from the output (e.g. `https://life-tracker-worker.YOUR_SUBDOMAIN.workers.dev`).
 
-### 5 — Configure the frontend
+### 5. Configure the frontend
 
 Open `frontend/app.js` and set the `API` constant at the top:
 
@@ -116,7 +116,7 @@ Open `frontend/app.js` and set the `API` constant at the top:
 const API = "https://life-tracker-worker.YOUR_SUBDOMAIN.workers.dev";
 ```
 
-### 6 — Deploy the frontend
+### 6. Deploy the frontend
 
 ```bash
 cd tracker
@@ -157,7 +157,7 @@ The three macro categories (`essential`, `leisure`, `other`) are stored as plain
 
 ## Security
 
-This app has **no authentication**. The Worker API is open — anyone who knows your Worker URL can call it directly.
+This app has **no authentication**. The Worker API is open, anyone who knows your Worker URL can call it directly.
 
 For personal use on a private device this is usually fine. If you want to restrict access, the easiest approach is [Cloudflare Access](https://developers.cloudflare.com/cloudflare-one/applications/configure-apps/): add a Zero Trust policy in front of your Pages deployment (email OTP or GitHub login, both free on the Zero Trust free tier). The Worker itself can be restricted by binding it to the Pages project.
 
@@ -200,10 +200,10 @@ And add the header to every `fetch` call in `frontend/app.js`.
 
 ## Design Notes
 
-- **Mood scale 1–4** — no neutral midpoint by design. Forces a lean.
-- **Sleep rounding** — hours are rounded to the nearest half-hour to reduce noise in correlations.
-- **Median, not mean** — correlation stats use median to resist outlier distortion (one big purchase shouldn't skew a month of data!).
-- **AMOLED theme** — pure `#000000` background.
+- **Mood scale 1–4**, no neutral midpoint by design. Forces a lean.
+- **Sleep rounding**, hours are rounded to the nearest half-hour to reduce noise in correlations.
+- **Median, not mean**, correlation stats use median to resist outlier distortion (one big purchase shouldn't skew a month of data!).
+- **AMOLED theme**, pure `#000000` background.
 
 ---
 
