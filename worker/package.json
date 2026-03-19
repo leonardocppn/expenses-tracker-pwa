@@ -1,0 +1,14 @@
+{
+  "name": "life-tracker-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker API for Life Tracker",
+  "main": "src/index.js",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^4.72.0"
+  }
+}
