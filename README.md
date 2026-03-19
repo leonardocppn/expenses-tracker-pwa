@@ -1,4 +1,4 @@
-# Life Tracker
+# Expenses Tracker
 
 A minimalist personal PWA for tracking daily **expenses**, **sleep**, and **mood** — with long-term correlation stats.
 
@@ -19,7 +19,14 @@ Built for daily use on an AMOLED phone screen. Zero external dependencies beyond
 
 ---
 ## Screenshots
-![Screenshot 1](screen1.png) ![Screenshot 2](screen2.png)
+ <table>              
+   <tr>
+     <td><img src="screen1.png" 
+ width="220"/></td>                             
+     <td><img src="screen2.png" 
+ width="220"/></td>                             
+   </tr>                                      
+ </table>  
 
 ## Tech Stack
 
